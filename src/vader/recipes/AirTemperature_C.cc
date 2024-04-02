@@ -70,7 +70,7 @@ bool AirTemperature_C::executeNL(atlas::FieldSet & fields)
     oops::Log::trace() << "entering AirTemperature_C::executeNL function" << std::endl;
 
     auto air_pressure_view = make_view<const double, 2>(fields[AP]);
-    auto perturb_potential_temperature_view = make_view<const double, 2>(fields[PAPT]);
+    auto perturbatioin_potential_temperature_view = make_view<const double, 2>(fields[PAPT]);
     auto temp_view = make_view<double, 2>(fields[AT]);
 
     const double pt_base = configVariables_.getDouble("pt_base");

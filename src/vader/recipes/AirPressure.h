@@ -62,6 +62,12 @@ class AirPressure_A : public RecipeBase
     const VaderConfigVars & configVariables_;
 };
 
+/*! \brief AirPressure_B class defines a recipe for pressure levels from perturbation air pressure
+           and base pressure (for WRF).
+ *
+ *  \details This recipe calculates AirPressure at mid points by summation of perturbation air pressure
+ *           and base air pressure. It does not provide TL/AD algorithms.
+ */
 class AirPressure_B : public RecipeBase
 {
  public:
