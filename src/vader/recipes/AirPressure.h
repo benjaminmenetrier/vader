@@ -29,6 +29,12 @@ class AirPressure_AParameters : public RecipeParametersBase {
     oops::RequiredParameter<std::string> name{"recipe name", this};
 };
 
+class AirPressure_BParameters : public RecipeParametersBase {
+  OOPS_CONCRETE_PARAMETERS(AirPressure_BParameters, RecipeParametersBase)
+
+ public:
+    oops::RequiredParameter<std::string> name{"recipe name", this};
+};
 /*! \brief AirPressure_A class defines a recipe for pressure levels from pressure
            thickness.
  *
@@ -44,6 +50,27 @@ class AirPressure_A : public RecipeBase
     typedef AirPressure_AParameters Parameters_;
 
     AirPressure_A(const Parameters_ &, const VaderConfigVars &);
+
+    std::string name() const override;
+    std::string product() const override;
+    std::vector<std::string> ingredients() const override;
+    size_t productLevels(const atlas::FieldSet &) const override;
+    atlas::FunctionSpace productFunctionSpace(const atlas::FieldSet &) const override;
+    bool executeNL(atlas::FieldSet &) override;
+
+ private:
+    const VaderConfigVars & configVariables_;
+};
+
+class AirPressure_B : public RecipeBase
+{
+ public:
+    static const char Name[];
+    static const std::vector<std::string> Ingredients;
+
+    typedef AirPressure_BParameters Parameters_;
+
+    AirPressure_B(const Parameters_ &, const VaderConfigVars &);
 
     std::string name() const override;
     std::string product() const override;
