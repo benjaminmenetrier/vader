@@ -22,7 +22,7 @@ namespace vader {
 // Static attribute initialization
 const char AirPressure_B::Name[] = "AirPressure_B";
 const std::vector<std::string> AirPressure_B::Ingredients = {"base_air_pressure",
-                                                             "perturb_air_pressure"};
+                                                             "perturbation_air_pressure"};
 
 // -------------------------------------------------------------------------------------------------
 
@@ -60,13 +60,13 @@ std::vector<std::string> AirPressure_B::ingredients() const {
 // -------------------------------------------------------------------------------------------------
 
 size_t AirPressure_B::productLevels(const atlas::FieldSet & afieldset) const {
-    return afieldset.field("air_pressure_levels").shape(1) - 1;
+    return afieldset.field("perturbation_air_pressure").shape(1);
 }
 
 // -------------------------------------------------------------------------------------------------
 
 atlas::FunctionSpace AirPressure_B::productFunctionSpace(const atlas::FieldSet & afieldset) const {
-    return afieldset.field("air_pressure_levels").functionspace();
+    return afieldset.field("perturbation_air_pressure").functionspace();
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ bool AirPressure_B::executeNL(atlas::FieldSet & afieldset) {
 
     // Get fields
     atlas::Field airPressureBaseF = afieldset.field("base_air_pressure");
-    atlas::Field airPressurePertF = afieldset.field("perturb_air_pressure");
+    atlas::Field airPressurePertF = afieldset.field("perturbation_air_pressure");
     atlas::Field airPressureF = afieldset.field("air_pressure");
 
     auto airPressureBase = atlas::array::make_view<double, 2>(airPressureBaseF);
@@ -94,7 +94,7 @@ bool AirPressure_B::executeNL(atlas::FieldSet & afieldset) {
     // Calculate the output variable
     for (int vv = 0; vv < v_size; ++vv) {
       for ( size_t hh = 0; hh < h_size ; ++hh ) {
-        airPressure(hh, vv) = airPressureBase + airPressurePert;
+        airPressure(hh, vv) = airPressureBase(hh, vv) + airPressurePert(hh, vv);
       }
     }
 

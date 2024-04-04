@@ -26,6 +26,7 @@ vader/recipes/AirPressureToKappa_A.cc
 vader/recipes/AirPressureToKappa.h
 vader/recipes/AirTemperature_A.cc
 vader/recipes/AirTemperature_B.cc
+vader/recipes/AirTemperature_C.cc
 vader/recipes/AirTemperature.h
 vader/recipes/AirVirtualTemperature_A.cc
 vader/recipes/AirVirtualTemperature.h

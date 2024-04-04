@@ -13,8 +13,8 @@
 #include "atlas/field.h"
 
 #include "oops/util/Logger.h"
-#include "vader/recipes/AirTemperature.h"
 #include "mo/constants.h"
+#include "vader/recipes/AirTemperature.h"
 
 using atlas::array::make_view;
 using atlas::idx_t;
@@ -27,8 +27,9 @@ namespace vader
 const char AirTemperature_C::Name[] = "AirTemperature_C";
 const char AT[] = "air_temperature";
 const char PAPT[] = "perturbation_air_potential_temperature";
+const char BAPT[] = "base_air_potential_temperature";
 const char AP[] = "air_pressure";
-const std::vector<std::string> AirTemperature_C::Ingredients = {PAPT, AP};
+const std::vector<std::string> AirTemperature_C::Ingredients = {PAPT, BAPT, AP};
 
 // Register the maker
 static RecipeMaker<AirTemperature_C> makerAirTemperature_C_(AirTemperature_C::Name);
@@ -70,15 +71,17 @@ bool AirTemperature_C::executeNL(atlas::FieldSet & fields)
     oops::Log::trace() << "entering AirTemperature_C::executeNL function" << std::endl;
 
     auto air_pressure_view = make_view<const double, 2>(fields[AP]);
-    auto perturbatioin_potential_temperature_view = make_view<const double, 2>(fields[PAPT]);
+    auto perturbation_potential_temperature_view = make_view<const double, 2>(fields[PAPT]);
+    auto base_potential_temperature_view = make_view<const double, 2>(fields[BAPT]);
     auto temp_view = make_view<double, 2>(fields[AT]);
-
-    const double pt_base = configVariables_.getDouble("pt_base");
 
     for (idx_t jn = 0; jn < fields[AT].shape(0) ; ++jn) {
       for (idx_t jl = 0; jl < fields[AT].shape(1); ++jl) {
-        temp_view(jn, jl) = (perturb_potential_temperature_view(jn, jl) + pt_base) *
-                            pow(air_pressure_view(jn,jl) / constants::p_zero, constants::rd_over_cp);
+        temp_view(jn, jl) = (perturbation_potential_temperature_view(jn, jl) + 
+                             base_potential_temperature_view(jn, jl)) *
+                            pow(air_pressure_view(jn,jl) / mo::constants::p_zero, mo::constants::rd_over_cp);
+        // oops::Log::debug() << "T= " << perturbation_potential_temperature_view(jn, jl) << std::endl;
+        // oops::Log::debug() << "T00= " << base_potential_temperature_view(jn, jl) << std::endl;
       }
     }
     oops::Log::trace() << "leaving AirTemperature_C::executeNL function" << std::endl;

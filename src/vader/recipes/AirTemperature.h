@@ -114,7 +114,7 @@ class AirTemperature_B : public RecipeBase {
  *
  *  \detail This recipe is a special case for WRF. It calculates air potential temperature using 
  *          perturbation air potential temperature (T in wrfout) and base air potential temperature 
- *          (pt_base, usually 300K) specified by a yaml key. Then multiply exner function derived 
+ *          (pt_base, default 290K) specified by a yaml key. Then multiply exner function derived 
  *          by air pressure to get air temperature. It does not provide TL/AD algorithms.
  */
 class AirTemperature_C : public RecipeBase {
