@@ -27,9 +27,8 @@ namespace vader
 const char AirTemperature_C::Name[] = "AirTemperature_C";
 const char AT[] = "air_temperature";
 const char PAPT[] = "perturbation_air_potential_temperature";
-const char BAPT[] = "base_air_potential_temperature";
 const char AP[] = "air_pressure";
-const std::vector<std::string> AirTemperature_C::Ingredients = {PAPT, BAPT, AP};
+const std::vector<std::string> AirTemperature_C::Ingredients = {PAPT, AP};
 
 // Register the maker
 static RecipeMaker<AirTemperature_C> makerAirTemperature_C_(AirTemperature_C::Name);
@@ -70,18 +69,16 @@ bool AirTemperature_C::executeNL(atlas::FieldSet & fields)
 {
     oops::Log::trace() << "entering AirTemperature_C::executeNL function" << std::endl;
 
+    const double pt_base = configVariables_.getDouble("base_air_potential_temperature");
+
     auto air_pressure_view = make_view<const double, 2>(fields[AP]);
     auto perturbation_potential_temperature_view = make_view<const double, 2>(fields[PAPT]);
-    auto base_potential_temperature_view = make_view<const double, 2>(fields[BAPT]);
     auto temp_view = make_view<double, 2>(fields[AT]);
 
     for (idx_t jn = 0; jn < fields[AT].shape(0) ; ++jn) {
       for (idx_t jl = 0; jl < fields[AT].shape(1); ++jl) {
-        temp_view(jn, jl) = (perturbation_potential_temperature_view(jn, jl) + 
-                             base_potential_temperature_view(jn, jl)) *
+        temp_view(jn, jl) = (perturbation_potential_temperature_view(jn, jl) + pt_base) *
                             pow(air_pressure_view(jn,jl) / mo::constants::p_zero, mo::constants::rd_over_cp);
-        // oops::Log::debug() << "T= " << perturbation_potential_temperature_view(jn, jl) << std::endl;
-        // oops::Log::debug() << "T00= " << base_potential_temperature_view(jn, jl) << std::endl;
       }
     }
     oops::Log::trace() << "leaving AirTemperature_C::executeNL function" << std::endl;

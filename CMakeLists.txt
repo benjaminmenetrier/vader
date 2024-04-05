@@ -32,7 +32,7 @@ find_package( Boost 1.64.0 REQUIRED )
 # Required
 find_package( jedicmake QUIET )  # Prefer find modules from jedi-cmake
 find_package( MPI REQUIRED COMPONENTS C Fortran )
-find_package( oops 1.10.0 REQUIRED )
+find_package( oops 1.9.0 REQUIRED )
 find_package( NetCDF REQUIRED COMPONENTS C Fortran )
 
 find_package( gsw QUIET )
