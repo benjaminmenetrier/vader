@@ -2,7 +2,10 @@ vader: {}
 trajectory grid:
   type : regular_gaussian
   N : 12
-trajectory filename: testdata/gauss_state_F12.nc
-ingredients: [height, height_levels, virtual_potential_temperature, air_pressure_levels_minus_one]
+trajectory filename: testdata/dry_air_density_levels_minus_one_A.nc
+ingredients: [height, height_levels, potential_temperature,
+              mass_content_of_cloud_liquid_water_in_atmosphere_layer,
+              mass_content_of_cloud_ice_in_atmosphere_layer,
+              specific_humidity, air_pressure_levels_minus_one]
 products: [dry_air_density_levels_minus_one]
 adjoint test tolerance: 1.e-12

@@ -1,4 +1,3 @@
-
 /*
  * (C) Crown Copyright 2024 Met Office.
  *
@@ -9,6 +8,7 @@
 
 #pragma once
 
+#include <map>
 #include <string>
 #include <vector>
 
@@ -21,20 +21,24 @@ namespace vader
 
 // -------------------------------------------------------------------------------------------------
 
-/*! \brief The class 'SaturationVaporPressure_A' defines a recipe for 'saturation water pressure (svp)'
+/*! \brief The class 'LogDerivativeSaturationVaporPressure_A' defines a recipe for
+ *         'derivative of ln water vapor partial pressure assuming saturation at interface
+ *         wrt air temperature at interface (dlsvpdT)'
  *
- *  \details This instantiation of RecipeBase produces saturation vapour pressure (svp)
+ *  \details This instantiation of RecipeBase produces derivative of ln water vapor partial
+ *           pressure assuming saturation at interface wrt air temperature at interface (dlsvpdT)
  *           using air temperature as input.
  *
  */
-class SaturationVaporPressure_A : public RecipeBase
+class LogDerivativeSaturationVaporPressure_A : public RecipeBase
 {
  public:
     static const char Name[];
 
     typedef EmptyRecipeParameters Parameters_;
 
-    SaturationVaporPressure_A(const Parameters_ &, const VaderConfigVars &);
+    LogDerivativeSaturationVaporPressure_A(const Parameters_ &,
+                                           const VaderConfigVars &);
 
     std::string name() const override;
     std::string product() const override;

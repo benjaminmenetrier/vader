@@ -9,6 +9,7 @@
 
 #include "vader/vader.h"
 // Recipe headers
+#include "recipes/AirDensityLevelsMinusOne.h"
 #include "recipes/AirPotentialTemperature.h"
 #include "recipes/AirPressureThickness.h"
 #include "recipes/AirTemperature.h"
@@ -35,9 +36,9 @@ const cookbookConfigType Vader::defaultCookbookDefinition = {
                                    {CloudIceMixingRatio_A::Name}},
         {"mass_content_of_cloud_liquid_water_in_atmosphere_layer",
                                    {CloudLiquidMixingRatio_A::Name}},
-        {"dry_air_density_levels_minus_one",  {DryAirDensityLevelsMinusOne_C::Name,
-                                               DryAirDensityLevelsMinusOne_A::Name,
-                                               DryAirDensityLevelsMinusOne_B::Name}},
+        {"dry_air_density_levels_minus_one",  {DryAirDensityLevelsMinusOne_A::Name}},
+        {"air_density_levels_minus_one",  {AirDensityLevelsMinusOne_A::Name,
+                                           AirDensityLevelsMinusOne_B::Name}},
         {"hydrostatic_exner_levels",  {HydrostaticExnerLevels_A::Name}},
         {"potential_temperature",  {AirPotentialTemperature_A::Name}},
         {"qrain",                  {RainMixingRatio_A::Name}},

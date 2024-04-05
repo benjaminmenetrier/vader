@@ -3,5 +3,5 @@ recipe:
 trajectory grid:
   type : regular_gaussian
   N : 12
-trajectory filename: testdata/gauss_state_F12.nc
+trajectory filename: testdata/dry_air_density_levels_minus_one_A.nc
 adjoint test tolerance: 1.e-12

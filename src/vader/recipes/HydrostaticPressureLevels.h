@@ -1,4 +1,3 @@
-
 /*
  * (C) Crown Copyright 2024 Met Office.
  *
@@ -9,6 +8,7 @@
 
 #pragma once
 
+#include <map>
 #include <string>
 #include <vector>
 
@@ -21,20 +21,22 @@ namespace vader
 
 // -------------------------------------------------------------------------------------------------
 
-/*! \brief The class 'SaturationVaporPressure_A' defines a recipe for 'saturation water pressure (svp)'
+/*! \brief The class 'HydrostaticPressureLevels_A' defines a recipe
+ *         for 'hydrostatic_pressure_levels'
  *
- *  \details This instantiation of RecipeBase produces saturation vapour pressure (svp)
- *           using air temperature as input.
+ *  \details This instantiation of RecipeBase produces hydrostatic pressure levels using
+ *           hydrostatic exner levels as input.
  *
  */
-class SaturationVaporPressure_A : public RecipeBase
+class HydrostaticPressureLevels_A : public RecipeBase
 {
  public:
     static const char Name[];
 
     typedef EmptyRecipeParameters Parameters_;
 
-    SaturationVaporPressure_A(const Parameters_ &, const VaderConfigVars &);
+    HydrostaticPressureLevels_A(const Parameters_ &,
+                                const VaderConfigVars &);
 
     std::string name() const override;
     std::string product() const override;

@@ -1,0 +1,8 @@
+vader: {}
+trajectory grid:
+  type : regular_gaussian
+  N : 12
+trajectory filename: testdata/air_density_levels_minus_one_A.nc
+ingredients: [height, height_levels, virtual_potential_temperature, air_pressure_levels_minus_one]
+products: [air_density_levels_minus_one]
+adjoint test tolerance: 1.e-12
