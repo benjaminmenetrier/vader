@@ -75,9 +75,6 @@ bool AirPressure_B::executeNL(atlas::FieldSet & afieldset) {
     //
     oops::Log::trace() << "AirPressure_B::executeNL Starting" << std::endl;
 
-    // Extract value from client config
-    const double kappa = configVariables_.getDouble("kappa");  // Need better name
-
     // Get fields
     atlas::Field airPressureBaseF = afieldset.field("base_air_pressure");
     atlas::Field airPressurePertF = afieldset.field("perturbation_air_pressure");

@@ -41,6 +41,7 @@ vader/recipes/AirDensityLevelsMinusOne_B.cc
 vader/recipes/DryAirDensityLevelsMinusOne_A.cc
 vader/recipes/HumidityMixingRatio.h
 vader/recipes/HumidityMixingRatio_A.cc
+vader/recipes/HumidityMixingRatio_B.cc
 vader/recipes/HydrostaticExnerLevels.h
 vader/recipes/HydrostaticExnerLevels_A.cc
 vader/recipes/HydrostaticPressureLevels.h
@@ -59,6 +60,8 @@ vader/recipes/SaturationVaporPressure.h
 vader/recipes/SaturationVaporPressure_A.cc
 vader/recipes/SpecificHumidity.h
 vader/recipes/SpecificHumidity_A.cc
+vader/recipes/SulfateMassFraction.h
+vader/recipes/SulfateMassFraction_A.cc
 vader/recipes/SurfaceAirPressure.h
 vader/recipes/SurfaceAirPressure_A.cc
 vader/recipes/TestRecipes.cc

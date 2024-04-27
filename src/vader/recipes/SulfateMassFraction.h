@@ -19,17 +19,8 @@
 
 namespace vader {
 
-class HumidityMixingRatio_AParameters : public RecipeParametersBase {
-  OOPS_CONCRETE_PARAMETERS(HumidityMixingRatio_AParameters, RecipeParametersBase)
-
- public:
-  oops::RequiredParameter<std::string> name{
-     "recipe name",
-     this};
-};
-
-class HumidityMixingRatio_BParameters : public RecipeParametersBase {
-  OOPS_CONCRETE_PARAMETERS(HumidityMixingRatio_BParameters, RecipeParametersBase)
+class SulfateMassFraction_AParameters : public RecipeParametersBase {
+  OOPS_CONCRETE_PARAMETERS(SulfateMassFraction_AParameters, RecipeParametersBase)
 
  public:
   oops::RequiredParameter<std::string> name{
@@ -38,41 +29,20 @@ class HumidityMixingRatio_BParameters : public RecipeParametersBase {
 };
 
 // ------------------------------------------------------------------------------------------------
-/*! \brief HumidityMixingRatio_A class defines a recipe for humidity mixing ratio
+/*! \brief SulfateMassFraction_A class defines a recipe for humidity mixing ratio
  *
  *  \details This instantiation of RecipeBase produces humidity mixing ratio (r)
  *           using specific humidity (q).
  *
  */
-class HumidityMixingRatio_A : public RecipeBase {
+class SulfateMassFraction_A : public RecipeBase {
  public:
     static const char Name[];
     static const std::vector<std::string> Ingredients;
 
-    typedef HumidityMixingRatio_AParameters Parameters_;
+    typedef SulfateMassFraction_AParameters Parameters_;
 
-    HumidityMixingRatio_A(const Parameters_ &, const VaderConfigVars &);
-
-    // Recipe base class overrides
-    std::string name() const override;
-    std::string product() const override;
-    std::vector<std::string> ingredients() const override;
-    size_t productLevels(const atlas::FieldSet &) const override;
-    atlas::FunctionSpace productFunctionSpace(const atlas::FieldSet &) const override;
-    bool executeNL(atlas::FieldSet &) override;
-
- private:
-    const VaderConfigVars & configVariables_;
-};
-
-class HumidityMixingRatio_B : public RecipeBase {
- public:
-    static const char Name[];
-    static const std::vector<std::string> Ingredients;
-
-    typedef HumidityMixingRatio_BParameters Parameters_;
-
-    HumidityMixingRatio_B(const Parameters_ &, const VaderConfigVars &);
+    SulfateMassFraction_A(const Parameters_ &, const VaderConfigVars &);
 
     // Recipe base class overrides
     std::string name() const override;
