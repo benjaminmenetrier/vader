@@ -11,6 +11,8 @@ testinput/recipe_DryAirDensityLevelsMinusOne_A.yaml
 testinput/recipe_HydrostaticExnerLevels_A.yaml
 testinput/recipe_HydrostaticPressureLevels_A.yaml
 testinput/recipe_LogDerivativeSaturationVaporPressure_A.yaml
+testinput/recipe_ParticulateMatter2p5_A.yaml
+testinput/recipe_ParticulateMatter2p5_B.yaml
 testinput/recipe_RainMixingRatio_A.yaml
 testinput/recipe_RelativeHumidity_A.yaml
 testinput/recipe_SaturationSpecificHumidity_A.yaml
@@ -31,6 +33,8 @@ testinput/vader_AirDensityLevelsMinusOne_A.yaml
 testinput/vader_AirDensityLevelsMinusOne_B.yaml
 testinput/vader_DryAirDensityLevelsMinusOne_A.yaml
 testinput/vader_HydrostaticExnerLevels_A.yaml
+testinput/vader_ParticulateMatter2p5_A.yaml
+testinput/vader_ParticulateMatter2p5_B.yaml
 testinput/vader_RainMixingRatio_A.yaml
 testinput/vader_TotalMixingRatio_A.yaml
 testinput/vader_TotalWater_A.yaml
@@ -49,6 +53,8 @@ list( APPEND vader_testdata
   testdata/air_density_levels_minus_one_A.nc
   testdata/air_density_levels_minus_one_B.nc
   testdata/dry_air_density_levels_minus_one_A.nc
+  testdata/aero6_gauss_state_F12.nc
+  testdata/rrfs_sd_gauss_state_F12.nc
 )
 
 # Create data directory for test input and symlink all files
@@ -125,6 +131,16 @@ ecbuild_add_test( TARGET  test_vader_recipe_HydrostaticPressureLevels_A
 ecbuild_add_test( TARGET  test_vader_recipe_LogDerivativeSaturationVaporPressure_A
                   COMMAND ${CMAKE_BINARY_DIR}/bin/test_recipe.x
                   ARGS    "testinput/recipe_LogDerivativeSaturationVaporPressure_A.yaml"
+                  LIBS    vader )
+
+ecbuild_add_test( TARGET  test_vader_recipe_ParticulateMatter2p5_A
+                  COMMAND ${CMAKE_BINARY_DIR}/bin/test_recipe.x
+                  ARGS    "testinput/recipe_ParticulateMatter2p5_A.yaml"
+                  LIBS    vader )
+
+ecbuild_add_test( TARGET  test_vader_recipe_ParticulateMatter2p5_B
+                  COMMAND ${CMAKE_BINARY_DIR}/bin/test_recipe.x
+                  ARGS    "testinput/recipe_ParticulateMatter2p5_B.yaml"
                   LIBS    vader )
 
 ecbuild_add_test( TARGET  test_vader_recipe_RainMixingRatio_A
@@ -227,6 +243,16 @@ ecbuild_add_test( TARGET  test_vader_vader_DryAirDensityLevelsMinusOne_A
 ecbuild_add_test( TARGET  test_vader_vader_HydrostaticExnerLevels_A
                   COMMAND ${CMAKE_BINARY_DIR}/bin/test_vader.x
                   ARGS    "testinput/vader_HydrostaticExnerLevels_A.yaml"
+                  LIBS    vader )
+
+ecbuild_add_test( TARGET  test_vader_vader_ParticulateMatter2p5_A
+                  COMMAND ${CMAKE_BINARY_DIR}/bin/test_vader.x
+                  ARGS    "testinput/vader_ParticulateMatter2p5_A.yaml"
+                  LIBS    vader )
+
+ecbuild_add_test( TARGET  test_vader_vader_ParticulateMatter2p5_B
+                  COMMAND ${CMAKE_BINARY_DIR}/bin/test_vader.x
+                  ARGS    "testinput/vader_ParticulateMatter2p5_B.yaml"
                   LIBS    vader )
 
 ecbuild_add_test( TARGET  test_vader_vader_RainMixingRatio_A
