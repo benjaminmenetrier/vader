@@ -12,8 +12,8 @@
 #include "atlas/array.h"
 #include "atlas/field.h"
 
-#include "oops/util/Logger.h"
 #include "mo/constants.h"
+#include "oops/util/Logger.h"
 #include "vader/recipes/AirTemperature.h"
 
 using atlas::array::make_view;
@@ -28,7 +28,7 @@ const char AirTemperature_C::Name[] = "AirTemperature_C";
 const char AT[] = "air_temperature";
 const char PAPT[] = "perturbation_air_potential_temperature";
 const char AP[] = "air_pressure";
-const std::vector<std::string> AirTemperature_C::Ingredients = {PAPT, AP};
+const oops::Variables AirTemperature_C::Ingredients{std::vector<std::string>{PAPT, AP}};
 
 // Register the maker
 static RecipeMaker<AirTemperature_C> makerAirTemperature_C_(AirTemperature_C::Name);
@@ -45,12 +45,12 @@ std::string AirTemperature_C::name() const
     return AirTemperature_C::Name;
 }
 
-std::string AirTemperature_C::product() const
+oops::Variable AirTemperature_C::product() const
 {
-    return "air_temperature";
+    return oops::Variable("air_temperature");
 }
 
-std::vector<std::string> AirTemperature_C::ingredients() const
+oops::Variables AirTemperature_C::ingredients() const
 {
     return AirTemperature_C::Ingredients;
 }
@@ -78,7 +78,8 @@ bool AirTemperature_C::executeNL(atlas::FieldSet & fields)
     for (idx_t jn = 0; jn < fields[AT].shape(0) ; ++jn) {
       for (idx_t jl = 0; jl < fields[AT].shape(1); ++jl) {
         temp_view(jn, jl) = (perturbation_potential_temperature_view(jn, jl) + pt_base) *
-                            pow(air_pressure_view(jn,jl) / mo::constants::p_zero, mo::constants::rd_over_cp);
+                            pow(air_pressure_view(jn, jl) / mo::constants::p_zero,
+                            mo::constants::rd_over_cp);
       }
     }
     oops::Log::trace() << "leaving AirTemperature_C::executeNL function" << std::endl;

@@ -22,7 +22,7 @@ namespace vader
 
 // Static attribute initialization
 const char SulfateMassFraction_A::Name[] = "SulfateMassFraction_A";
-const std::vector<std::string> SulfateMassFraction_A::Ingredients = {"sulfate_ppmv"};
+const oops::Variables SulfateMassFraction_A::Ingredients{{"sulfate_ppmv"}};
 
 // Register the maker
 static RecipeMaker<SulfateMassFraction_A> makerSulfateMassFraction_(SulfateMassFraction_A::Name);
@@ -39,12 +39,12 @@ std::string SulfateMassFraction_A::name() const
     return SulfateMassFraction_A::Name;
 }
 
-std::string SulfateMassFraction_A::product() const
+oops::Variable SulfateMassFraction_A::product() const
 {
-    return "mass_fraction_of_sulfate_in_air";
+    return oops::Variable{"mass_fraction_of_sulfate_in_air"};
 }
 
-std::vector<std::string> SulfateMassFraction_A::ingredients() const
+oops::Variables SulfateMassFraction_A::ingredients() const
 {
     return SulfateMassFraction_A::Ingredients;
 }
@@ -70,7 +70,6 @@ bool SulfateMassFraction_A::executeNL(atlas::FieldSet & afieldset)
     atlas::field::for_each_value(afieldset["sulfate_ppmv"],
                                  afieldset["mass_fraction_of_sulfate_in_air"],
                                  [&](const double sulf_ppmv, double& sulf_ugkg) {
-
         sulf_ugkg = sulf_ppmv * sulfmw / airmw * 1e-6 * 1e9;
     });
 

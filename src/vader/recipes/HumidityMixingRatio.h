@@ -47,7 +47,7 @@ class HumidityMixingRatio_BParameters : public RecipeParametersBase {
 class HumidityMixingRatio_A : public RecipeBase {
  public:
     static const char Name[];
-    static const std::vector<std::string> Ingredients;
+    static const oops::Variables Ingredients;
 
     typedef HumidityMixingRatio_AParameters Parameters_;
 
@@ -55,8 +55,8 @@ class HumidityMixingRatio_A : public RecipeBase {
 
     // Recipe base class overrides
     std::string name() const override;
-    std::string product() const override;
-    std::vector<std::string> ingredients() const override;
+    oops::Variable product() const override;
+    oops::Variables ingredients() const override;
     size_t productLevels(const atlas::FieldSet &) const override;
     atlas::FunctionSpace productFunctionSpace(const atlas::FieldSet &) const override;
     bool executeNL(atlas::FieldSet &) override;
@@ -68,7 +68,7 @@ class HumidityMixingRatio_A : public RecipeBase {
 class HumidityMixingRatio_B : public RecipeBase {
  public:
     static const char Name[];
-    static const std::vector<std::string> Ingredients;
+    static const oops::Variables Ingredients;
 
     typedef HumidityMixingRatio_BParameters Parameters_;
 
@@ -76,8 +76,8 @@ class HumidityMixingRatio_B : public RecipeBase {
 
     // Recipe base class overrides
     std::string name() const override;
-    std::string product() const override;
-    std::vector<std::string> ingredients() const override;
+    oops::Variable product() const override;
+    oops::Variables ingredients() const override;
     size_t productLevels(const atlas::FieldSet &) const override;
     atlas::FunctionSpace productFunctionSpace(const atlas::FieldSet &) const override;
     bool executeNL(atlas::FieldSet &) override;

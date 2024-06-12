@@ -22,7 +22,7 @@ namespace vader
 
 // Static attribute initialization
 const char SpecificHumidity_A::Name[] = "SpecificHumidity_A";
-const std::vector<std::string> SpecificHumidity_A::Ingredients = {"humidity_mixing_ratio"};
+const oops::Variables SpecificHumidity_A::Ingredients{{"humidity_mixing_ratio"}};
 
 // Register the maker
 static RecipeMaker<SpecificHumidity_A> makerSpecificHumidity_(SpecificHumidity_A::Name);
@@ -39,12 +39,12 @@ std::string SpecificHumidity_A::name() const
     return SpecificHumidity_A::Name;
 }
 
-std::string SpecificHumidity_A::product() const
+oops::Variable SpecificHumidity_A::product() const
 {
-    return "humidity_mixing_ratio";
+    return oops::Variable{"humidity_mixing_ratio"};
 }
 
-std::vector<std::string> SpecificHumidity_A::ingredients() const
+oops::Variables SpecificHumidity_A::ingredients() const
 {
     return SpecificHumidity_A::Ingredients;
 }
