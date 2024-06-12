@@ -68,8 +68,8 @@ void testRecipeNonlinear() {
   const auto & recipeParams = params.recipe.value().recipeParams.value();
   RecipeBase* recipe = RecipeFactory::create(recipeParams.name, recipeParams,
                                              eckit::LocalConfiguration());
-  const std::vector<std::string> ingredientVars = recipe->ingredients();
-  const std::string productVar = recipe->product();
+  const oops::Variables ingredientVars = recipe->ingredients();
+  const oops::Variable productVar = recipe->product();
   oops::Log::info() << "Testing non-linear vader recipe: " << recipe->name()
                     << std::endl;
   oops::Log::info() << " Ingredients: " << ingredientVars << std::endl;
@@ -88,23 +88,23 @@ void testRecipeNonlinear() {
   if ((retval = nc_open(filename.c_str(), NC_NOWRITE, &ncid))) ERR(retval);
   std::vector<size_t> ingredientLevels(ingredientVars.size(), 0);
   for (size_t jvar = 0; jvar < ingredientVars.size(); ++jvar) {
-    addFieldFromFile(vader_computed, ingredientVars[jvar], fs, grid,
+    addFieldFromFile(vader_computed, ingredientVars[jvar].name(), fs, grid,
                      ingredientLevels[jvar], ncid);
   }
   oops::Log::info() << "Reading reference product from file: " << filename << std::endl;
   size_t productLevels = 0;
-  addFieldFromFile(reference, productVar, fs, grid, productLevels, ncid);
+  addFieldFromFile(reference, productVar.name(), fs, grid, productLevels, ncid);
 
   // allocate field for the product (usually done in vader, but here the recipes are
   // tested outside of vader infrastructure)
   productLevels = recipe->productLevels(vader_computed);
-  addZeroField(vader_computed, productVar, fs, productLevels);
+  addZeroField(vader_computed, productVar.name(), fs, productLevels);
   // run NL recipe
   recipe->executeNL(vader_computed);
 
   // Debug prints
-  const auto & field = vader_computed[productVar];
-  const auto & refField = reference[productVar];
+  const auto & field = vader_computed[productVar.name()];
+  const auto & refField = reference[productVar.name()];
   const auto fieldView = atlas::array::make_view<const double, 2>(field);
   const auto refFieldView = atlas::array::make_view<const double, 2>(refField);
   oops::Log::debug() << "Comparing fields " << productVar << std::endl;
@@ -131,8 +131,8 @@ void testRecipeNonlinear() {
 
   // compute norm of the difference between the reference and the computed products
   util::subtractFieldSets(vader_computed, reference);
-  const double norm = util::normField(vader_computed[productVar], oops::mpi::world());
-  const double refNorm = util::normField(reference[productVar], oops::mpi::world());
+  const double norm = util::normField(vader_computed[productVar.name()], oops::mpi::world());
+  const double refNorm = util::normField(reference[productVar.name()], oops::mpi::world());
   oops::Log::info() << "Norm of the difference between the reference and the computed field: "
                     << norm << std::endl;
   const double tol = params.nlTolerance;
@@ -152,8 +152,8 @@ void testRecipeAdjoint() {
   const auto & recipeParams = params.recipe.value().recipeParams.value();
   RecipeBase* recipe = RecipeFactory::create(recipeParams.name, recipeParams,
                                              eckit::LocalConfiguration());
-  const std::vector<std::string> ingredientVars = recipe->ingredients();
-  const std::string productVar = recipe->product();
+  const oops::Variables ingredientVars = recipe->ingredients();
+  const oops::Variable productVar = recipe->product();
   oops::Log::info() << "Testing vader recipe (K): " << recipe->name() << std::endl;
   oops::Log::info() << " Ingredients (dx): " << ingredientVars << std::endl;
   oops::Log::info() << " Product (dy): " << productVar << std::endl;
@@ -170,14 +170,14 @@ void testRecipeAdjoint() {
   if ((retval = nc_open(filename.c_str(), NC_NOWRITE, &ncid))) ERR(retval);
   std::vector<size_t> ingredientLevels(ingredientVars.size(), 0);
   for (size_t jvar = 0; jvar < ingredientVars.size(); ++jvar) {
-    addFieldFromFile(traj, ingredientVars[jvar], fs, grid,
+    addFieldFromFile(traj, ingredientVars[jvar].name(), fs, grid,
                      ingredientLevels[jvar], ncid);
   }
 
   // allocate field for the product in the trajectory (usually done in vader,
   // but here the recipes are tested outside of vader infrastructure)
   const size_t productLevels = recipe->productLevels(traj);
-  addZeroField(traj, productVar, fs, productLevels);
+  addZeroField(traj, productVar.name(), fs, productLevels);
   // run NL to set trajectory
   recipe->executeNL(traj);
 
@@ -186,9 +186,9 @@ void testRecipeAdjoint() {
   // and Kdx (for the product variable) that will be filled in recipe.executeTL.
   atlas::FieldSet dxin;
   for (size_t jvar = 0; jvar < ingredientVars.size(); ++jvar) {
-    addRandomField(dxin, ingredientVars[jvar], fs, ingredientLevels[jvar]);
+    addRandomField(dxin, ingredientVars[jvar].name(), fs, ingredientLevels[jvar]);
   }
-  addZeroField(dxin, productVar, fs, productLevels);
+  addZeroField(dxin, productVar.name(), fs, productLevels);
   // fill the product variable with Kdx
   recipe->executeTL(dxin, traj);
 
@@ -196,15 +196,15 @@ void testRecipeAdjoint() {
   // and K^Tdy (for the ingredients variables) that will be updated after
   // recipe.executeAD call.
   atlas::FieldSet dxout;
-  addRandomField(dxout, productVar, fs, productLevels);
+  addRandomField(dxout, productVar.name(), fs, productLevels);
   for (size_t jvar = 0; jvar < ingredientVars.size(); ++jvar) {
-    addZeroField(dxout, ingredientVars[jvar], fs, ingredientLevels[jvar]);
+    addZeroField(dxout, ingredientVars[jvar].name(), fs, ingredientLevels[jvar]);
   }
   // after calling recipe->executeAD, dy (the product variable) will be
   // zeroed out, so the copy is needed.
-  atlas::Field dy(productVar, dxout.field(productVar).datatype(),
-                  dxout.field(productVar).shape());
-  auto from_view = atlas::array::make_view<double, 2>(dxout.field(productVar));
+  atlas::Field dy(productVar.name(), dxout.field(productVar.name()).datatype(),
+                  dxout.field(productVar.name()).shape());
+  auto from_view = atlas::array::make_view<double, 2>(dxout.field(productVar.name()));
   auto to_view = atlas::array::make_view<double, 2>(dy);
   to_view.assign(from_view);
   // fill the ingredients variables with K^T dxout
@@ -213,10 +213,10 @@ void testRecipeAdjoint() {
   double zz1 = 0;
   // Compute (dx, K^T dy)
   for (const auto & ingredientVar : ingredientVars) {
-    zz1 += dotProduct(dxin[ingredientVar], dxout[ingredientVar]);
+    zz1 += dotProduct(dxin[ingredientVar.name()], dxout[ingredientVar.name()]);
   }
   // Compute (Kdx, dy)
-  double zz2 = dotProduct(dxin[productVar], dy);
+  double zz2 = dotProduct(dxin[productVar.name()], dy);
 
   oops::Log::info() << "<dx,KTdy>=" << zz1 << std::endl;
   oops::Log::info() << "<Kdx,dy>=" << zz2 << std::endl;

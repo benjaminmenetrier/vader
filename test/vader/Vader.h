@@ -83,7 +83,7 @@ void testVaderAdjoint() {
   if ((retval = nc_open(filename.c_str(), NC_NOWRITE, &ncid))) ERR(retval);
   std::vector<size_t> ingredientLevels(ingredientVars.size(), 0);
   for (size_t jvar = 0; jvar < ingredientVars.size(); ++jvar) {
-    addFieldFromFile(traj, ingredientVars[jvar], fs, grid,
+    addFieldFromFile(traj, ingredientVars[jvar].name(), fs, grid,
                      ingredientLevels[jvar], ncid);
   }
   // run NL to set trajectory
@@ -102,7 +102,7 @@ void testVaderAdjoint() {
   // Allocating dxin to contain randomized dx (for the ingredient variables)
   atlas::FieldSet dxin;
   for (size_t jvar = 0; jvar < ingredientVars.size(); ++jvar) {
-    addRandomField(dxin, ingredientVars[jvar], fs, ingredientLevels[jvar]);
+    addRandomField(dxin, ingredientVars[jvar].name(), fs, ingredientLevels[jvar]);
   }
   // fill the product variable with Kdx
   vars = productVars;
@@ -112,11 +112,12 @@ void testVaderAdjoint() {
   // After calling recipe->executeAD, dy (the product variable) will be
   // zeroed out, so the copy is needed.
   atlas::FieldSet dxout, dy;
-  for (const auto & productVar : productVars.variables()) {
-    addRandomField(dxout, productVar, fs, traj.field(productVar).shape(1));
-    atlas::Field field(productVar, dxout.field(productVar).datatype(),
-                  dxout.field(productVar).shape());
-    auto from_view = atlas::array::make_view<double, 2>(dxout.field(productVar));
+  for (const auto & productVar : productVars) {
+    const std::string & name = productVar.name();
+    addRandomField(dxout, name, fs, traj.field(name).shape(1));
+    atlas::Field field(name, dxout.field(name).datatype(),
+                  dxout.field(name).shape());
+    auto from_view = atlas::array::make_view<double, 2>(dxout.field(name));
     auto to_view = atlas::array::make_view<double, 2>(field);
     to_view.assign(from_view);
     dy.add(field);
@@ -127,13 +128,13 @@ void testVaderAdjoint() {
 
   double zz1 = 0;
   // Compute (dx, K^T dy)
-  for (const auto & ingredientVar : ingredientVars.variables()) {
-    zz1 += dotProduct(dxin[ingredientVar], dxout[ingredientVar]);
+  for (const auto & ingredientVar : ingredientVars) {
+    zz1 += dotProduct(dxin[ingredientVar.name()], dxout[ingredientVar.name()]);
   }
   // Compute (Kdx, dy)
   double zz2 = 0;
-  for (const auto & productVar : productVars.variables()) {
-    zz2 += dotProduct(dxin[productVar], dy[productVar]);
+  for (const auto & productVar : productVars) {
+    zz2 += dotProduct(dxin[productVar.name()], dy[productVar.name()]);
   }
   oops::Log::info() << "<dx,KTdy>=" << zz1 << std::endl;
   oops::Log::info() << "<Kdx,dy>=" << zz2 << std::endl;
