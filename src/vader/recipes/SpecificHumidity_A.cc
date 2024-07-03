@@ -64,10 +64,11 @@ bool SpecificHumidity_A::executeNL(atlas::FieldSet & afieldset)
 {
     oops::Log::trace() << "entering SpecificHumidity_A::executeNL function" << std::endl;
 
+    // humidity_mixing_ratio in g/kg; specific_humidity in kg/kg
     atlas::field::for_each_value(afieldset["humidity_mixing_ratio"],
                                  afieldset["specific_humidity"],
                                  [&](const double mixr, double& q) {
-        q = mixr / (1. + mixr);
+        q = mixr / (1. + mixr) / 1000. ;
     });
 
     oops::Log::trace() << "leaving SpecificHumidity_A::executeNL function" << std::endl;
