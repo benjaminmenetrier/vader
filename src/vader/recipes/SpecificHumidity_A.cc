@@ -68,7 +68,7 @@ bool SpecificHumidity_A::executeNL(atlas::FieldSet & afieldset)
     atlas::field::for_each_value(afieldset["humidity_mixing_ratio"],
                                  afieldset["specific_humidity"],
                                  [&](const double mixr, double& q) {
-        q = mixr / (1. + mixr) / 1000. ;
+        q = mixr / (1. + mixr) / 1000.;
     });
 
     oops::Log::trace() << "leaving SpecificHumidity_A::executeNL function" << std::endl;
