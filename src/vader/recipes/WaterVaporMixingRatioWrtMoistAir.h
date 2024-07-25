@@ -19,8 +19,8 @@
 
 namespace vader {
 
-class SpecificHumidity_AParameters : public RecipeParametersBase {
-  OOPS_CONCRETE_PARAMETERS(SpecificHumidity_AParameters, RecipeParametersBase)
+class WaterVaporMixingRatioWrtMoistAir_AParameters : public RecipeParametersBase {
+  OOPS_CONCRETE_PARAMETERS(WaterVaporMixingRatioWrtMoistAir_AParameters, RecipeParametersBase)
 
  public:
   oops::RequiredParameter<std::string> name{
@@ -29,20 +29,20 @@ class SpecificHumidity_AParameters : public RecipeParametersBase {
 };
 
 // ------------------------------------------------------------------------------------------------
-/*! \brief SpecificHumidity_A class defines a recipe for humidity mixing ratio
+/*! \brief WaterVaporMixingRatioWrtMoistAir_A class defines a recipe for humidity mixing ratio
  *
  *  \details This instantiation of RecipeBase produces humidity mixing ratio (r)
  *           using specific humidity (q).
  *
  */
-class SpecificHumidity_A : public RecipeBase {
+class WaterVaporMixingRatioWrtMoistAir_A : public RecipeBase {
  public:
     static const char Name[];
     static const oops::Variables Ingredients;
 
-    typedef SpecificHumidity_AParameters Parameters_;
+    typedef WaterVaporMixingRatioWrtMoistAir_AParameters Parameters_;
 
-    SpecificHumidity_A(const Parameters_ &, const VaderConfigVars &);
+    WaterVaporMixingRatioWrtMoistAir_A(const Parameters_ &, const VaderConfigVars &);
 
     // Recipe base class overrides
     std::string name() const override;
