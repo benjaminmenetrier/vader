@@ -22,7 +22,8 @@ namespace vader
 
 // Static attribute initialization
 const char HumidityMixingRatio_A::Name[] = "HumidityMixingRatio_A";
-const oops::Variables HumidityMixingRatio_A::Ingredients{{"water_vapor_mixing_ratio_wrt_moist_air"}};
+const oops::Variables HumidityMixingRatio_A::Ingredients{
+                      {"water_vapor_mixing_ratio_wrt_moist_air"}};
 
 // Register the maker
 static RecipeMaker<HumidityMixingRatio_A> makerHumidityMixingRatio_(HumidityMixingRatio_A::Name);
