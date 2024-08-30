@@ -6,5 +6,5 @@ trajectory filename: testdata/gauss_state_F12.nc
 ingredients:
   - m_cl
   - m_t
-products: [mass_content_of_cloud_liquid_water_in_atmosphere_layer]
+products: [cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water]
 adjoint test tolerance: 1.e-13

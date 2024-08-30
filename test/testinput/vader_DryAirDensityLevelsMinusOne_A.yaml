@@ -3,9 +3,8 @@ trajectory grid:
   type : regular_gaussian
   N : 12
 trajectory filename: testdata/dry_air_density_levels_minus_one_A.nc
-ingredients: [height, height_levels, potential_temperature,
-              mass_content_of_cloud_liquid_water_in_atmosphere_layer,
-              mass_content_of_cloud_ice_in_atmosphere_layer,
-              specific_humidity, air_pressure_levels_minus_one]
+ingredients: [air_pressure_levels_minus_one, height, height_levels,
+              potential_temperature, cloud_ice_mixing_ratio_wrt_moist_air_and_condensed_water,
+              cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water, specific_humidity]
 products: [dry_air_density_levels_minus_one]
 adjoint test tolerance: 1.e-12
