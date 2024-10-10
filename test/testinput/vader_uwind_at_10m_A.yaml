@@ -4,5 +4,5 @@ trajectory grid:
   N : 12
 trajectory filename: testdata/wind_at_10m_A.nc
 ingredients: [eastward_wind]
-products: [uwind_at_10m]
+products: [eastward_wind_at_10m]
 adjoint test tolerance: 1.e-12

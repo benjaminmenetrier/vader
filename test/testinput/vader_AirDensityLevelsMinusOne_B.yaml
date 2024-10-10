@@ -3,6 +3,6 @@ trajectory grid:
   type : regular_gaussian
   N : 12
 trajectory filename: testdata/air_density_levels_minus_one_B.nc
-ingredients: [height, height_levels, virtual_potential_temperature, air_pressure_levels]
+ingredients: [height_above_mean_sea_level, height_above_mean_sea_level_levels, virtual_potential_temperature, air_pressure_levels]
 products: [air_density_levels_minus_one]
 adjoint test tolerance: 1.e-12

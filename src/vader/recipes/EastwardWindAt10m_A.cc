@@ -13,7 +13,7 @@
 #include "atlas/field/Field.h"
 #include "atlas/util/Metadata.h"
 #include "oops/util/Logger.h"
-#include "vader/recipes/uwind_at_10m.h"
+#include "vader/recipes/EastwardWindAt10m.h"
 
 namespace vader
 {
@@ -39,7 +39,7 @@ std::string uwind_at_10m_A::name() const
 
 oops::Variable uwind_at_10m_A::product() const
 {
-    return oops::Variable{"uwind_at_10m"};
+    return oops::Variable{"eastward_wind_at_10m"};
 }
 
 oops::Variables uwind_at_10m_A::ingredients() const
@@ -64,7 +64,8 @@ bool uwind_at_10m_A::executeNL(atlas::FieldSet & afieldset)
       << std::endl;
 
     auto eastward_wind_view = atlas::array::make_view<double, 2>(afieldset["eastward_wind"]);
-    auto uwind_at_10m_A_view = atlas::array::make_view<double, 2>(afieldset["uwind_at_10m"]);
+    auto uwind_at_10m_A_view =
+                              atlas::array::make_view<double, 2>(afieldset["eastward_wind_at_10m"]);
 
     size_t no_of_horizontal_pts = uwind_at_10m_A_view.shape(0);
     for ( size_t jnode = 0; jnode < no_of_horizontal_pts ; ++jnode ) {
@@ -82,7 +83,8 @@ bool uwind_at_10m_A::executeTL(atlas::FieldSet & afieldsetTL,
         << std::endl;
 
     auto tl_eastward_wind_view = atlas::array::make_view<double, 2>(afieldsetTL["eastward_wind"]);
-    auto tl_uwind_at_10m_A_view = atlas::array::make_view<double, 2>(afieldsetTL["uwind_at_10m"]);
+    auto tl_uwind_at_10m_A_view =
+                            atlas::array::make_view<double, 2>(afieldsetTL["eastward_wind_at_10m"]);
 
     size_t no_of_horizontal_pts = tl_uwind_at_10m_A_view.shape(0);
     for ( size_t jnode = 0; jnode < no_of_horizontal_pts ; ++jnode ) {
@@ -101,7 +103,8 @@ bool uwind_at_10m_A::executeAD(atlas::FieldSet & afieldsetAD,
         << std::endl;
 
     auto ad_eastward_wind_view = atlas::array::make_view<double, 2>(afieldsetAD["eastward_wind"]);
-    auto ad_uwind_at_10m_A_view = atlas::array::make_view<double, 2>(afieldsetAD["uwind_at_10m"]);
+    auto ad_uwind_at_10m_A_view =
+                            atlas::array::make_view<double, 2>(afieldsetAD["eastward_wind_at_10m"]);
 
     size_t no_of_horizontal_pts = ad_eastward_wind_view.shape(0);
     for ( size_t jnode = 0; jnode < no_of_horizontal_pts ; ++jnode ) {

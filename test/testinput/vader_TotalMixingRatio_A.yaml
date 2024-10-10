@@ -4,9 +4,9 @@ trajectory grid:
   N : 12
 trajectory filename: testdata/gauss_state_F12.nc
 ingredients:
-  - m_v
-  - m_ci
-  - m_cl
-  - m_r
-products: [m_t]
+  - water_vapor_mixing_ratio_wrt_dry_air
+  - cloud_ice_mixing_ratio_wrt_dry_air
+  - cloud_liquid_water_mixing_ratio_wrt_dry_air
+  - rain_mixing_ratio_wrt_dry_air
+products: [total_water_mixing_ratio_wrt_dry_air]
 adjoint test tolerance: 1.e-12

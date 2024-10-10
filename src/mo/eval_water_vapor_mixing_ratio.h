@@ -14,10 +14,7 @@ namespace mo {
 /// \brief function to evaluate the water vapor mixing ratio wrt
 ///        moist air and condensed water (one possible definition
 ///        of specific humidity):
-///   q = m_v/m_t
-/// where ...
-///   m_v  = water vapor mixing ratio wrt dry air
-///   m_t  = moist air and condensed water mixing ratio wrt dry air
+///   q = water_vapor_mixing_ratio_wrt_dry_air/total_water_mixing_ratio_wrt_dry_air
 ///
 bool eval_water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water_nl(
         atlas::FieldSet & stateFlds);

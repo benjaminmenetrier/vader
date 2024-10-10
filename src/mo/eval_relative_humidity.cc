@@ -109,38 +109,38 @@ void eval_relative_humidity_ad(atlas::FieldSet & hatFlds,
 
 // --------------------------------------------------------------------------------------
 
-void eval_relative_humidity_2m_tl(atlas::FieldSet & incFlds) {
-  oops::Log::trace() << "[eval_relative_humidity_2m_tl()] starting ..." << std::endl;
+void eval_relative_humidity_at_2m_tl(atlas::FieldSet & incFlds) {
+  oops::Log::trace() << "[eval_relative_humidity_at_2m_tl()] starting ..." << std::endl;
   const auto rhIncView = make_view<double, 2>(incFlds["relative_humidity"]);
-  auto rh2mIncView = make_view<double, 2>(incFlds["relative_humidity_2m"]);
+  auto rh2mIncView = make_view<double, 2>(incFlds["relative_humidity_at_2m"]);
   const idx_t sizeOwned =
-    util::getSizeOwned(incFlds["relative_humidity_2m"].functionspace());
+    util::getSizeOwned(incFlds["relative_humidity_at_2m"].functionspace());
 
   for (atlas::idx_t jn = 0; jn < sizeOwned; ++jn) {
       rh2mIncView(jn, 0) = rhIncView(jn, 0);
   }
-  incFlds["relative_humidity_2m"].set_dirty();
+  incFlds["relative_humidity_at_2m"].set_dirty();
 
-  oops::Log::trace()<< "[eval_relative_humidity_2m_tl()] ... exit" << std::endl;
+  oops::Log::trace()<< "[eval_relative_humidity_at_2m_tl()] ... exit" << std::endl;
 }
 
 // --------------------------------------------------------------------------------------
 
-void eval_relative_humidity_2m_ad(atlas::FieldSet & hatFlds) {
-  oops::Log::trace() << "[eval_relative_humidity_2m_ad()] starting ..." << std::endl;
+void eval_relative_humidity_at_2m_ad(atlas::FieldSet & hatFlds) {
+  oops::Log::trace() << "[eval_relative_humidity_at_2m_ad()] starting ..." << std::endl;
   auto rhHatView = make_view<double, 2>(hatFlds["relative_humidity"]);
-  auto rh2mHatView = make_view<double, 2>(hatFlds["relative_humidity_2m"]);
+  auto rh2mHatView = make_view<double, 2>(hatFlds["relative_humidity_at_2m"]);
   const idx_t sizeOwned =
-    util::getSizeOwned(hatFlds["relative_humidity_2m"].functionspace());
+    util::getSizeOwned(hatFlds["relative_humidity_at_2m"].functionspace());
 
   for (atlas::idx_t jn = 0; jn < sizeOwned; ++jn) {
     rhHatView(jn, 0) += rh2mHatView(jn, 0);
     rh2mHatView(jn, 0) = 0.0;
   }
   hatFlds["relative_humidity"].set_dirty();
-  hatFlds["relative_humidity_2m"].set_dirty();
+  hatFlds["relative_humidity_at_2m"].set_dirty();
 
-  oops::Log::trace()<< "[eval_relative_humidity_2m_ad()] ... exit" << std::endl;
+  oops::Log::trace()<< "[eval_relative_humidity_at_2m_ad()] ... exit" << std::endl;
 }
 
 // --------------------------------------------------------------------------------------

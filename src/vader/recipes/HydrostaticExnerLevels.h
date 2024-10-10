@@ -33,7 +33,7 @@ class HydrostaticExnerLevels_AParameters : public RecipeParametersBase {
 /*! \brief HydrostaticExnerLevels_A class defines a recipe for hydrostatic exner levels
  *
  *  \details This instantiation of RecipeBase produces hydrostatic exner levels
- *           using height_levels, virtual_potential_temperature and
+ *           using height_above_mean_sea_level_levels, virtual_potential_temperature and
  *           air_pressure_levels_minus_one as inputs.
  */
 class HydrostaticExnerLevels_A : public RecipeBase {

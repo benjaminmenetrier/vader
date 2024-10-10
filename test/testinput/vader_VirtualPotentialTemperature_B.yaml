@@ -3,6 +3,6 @@ trajectory grid:
   type : regular_gaussian
   N : 12
 trajectory filename: testdata/gauss_state_F12.nc
-ingredients: [specific_humidity, potential_temperature]
+ingredients: [specific_humidity, air_potential_temperature]
 products: [virtual_potential_temperature]
 adjoint test tolerance: 1.e-12

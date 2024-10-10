@@ -25,7 +25,7 @@ namespace mo {
 void eval_virtual_potential_temperature_nl(atlas::FieldSet & stateFlds) {
   oops::Log::trace() << "[eval_virtual_potential_temperature_nl()] starting ..." << std::endl;
   const auto qView = make_view<const double, 2>(stateFlds["specific_humidity"]);
-  const auto thetaView = make_view<const double, 2>(stateFlds["potential_temperature"]);
+  const auto thetaView = make_view<const double, 2>(stateFlds["air_potential_temperature"]);
   auto vThetaView = make_view<double, 2>(stateFlds["virtual_potential_temperature"]);
 
   const idx_t n_levels = stateFlds["virtual_potential_temperature"].shape(1);
@@ -48,9 +48,9 @@ void eval_virtual_potential_temperature_tl(atlas::FieldSet & incFlds,
                                            const atlas::FieldSet & augStateFlds) {
   oops::Log::trace() << "[eval_virtual_potential_temperature_tl()] starting ..." << std::endl;
   const auto qView = make_view<const double, 2>(augStateFlds["specific_humidity"]);
-  const auto thetaView = make_view<const double, 2>(augStateFlds["potential_temperature"]);
+  const auto thetaView = make_view<const double, 2>(augStateFlds["air_potential_temperature"]);
   const auto qIncView = make_view<const double, 2>(incFlds["specific_humidity"]);
-  const auto thetaIncView = make_view<const double, 2>(incFlds["potential_temperature"]);
+  const auto thetaIncView = make_view<const double, 2>(incFlds["air_potential_temperature"]);
   auto vThetaIncView = make_view<double, 2>(incFlds["virtual_potential_temperature"]);
 
   const idx_t n_levels = incFlds["virtual_potential_temperature"].shape(1);
@@ -72,9 +72,9 @@ void eval_virtual_potential_temperature_ad(atlas::FieldSet & hatFlds,
                                            const atlas::FieldSet & augStateFlds) {
   oops::Log::trace() << "[eval_virtual_potential_temperature_ad()] starting ..." << std::endl;
   const auto qView = make_view<const double, 2>(augStateFlds["specific_humidity"]);
-  const auto thetaView = make_view<const double, 2>(augStateFlds["potential_temperature"]);
+  const auto thetaView = make_view<const double, 2>(augStateFlds["air_potential_temperature"]);
   auto qHatView = make_view<double, 2>(hatFlds["specific_humidity"]);
-  auto thetaHatView = make_view<double, 2>(hatFlds["potential_temperature"]);
+  auto thetaHatView = make_view<double, 2>(hatFlds["air_potential_temperature"]);
   auto vThetaHatView = make_view<double, 2>(hatFlds["virtual_potential_temperature"]);
 
   const idx_t n_levels = hatFlds["virtual_potential_temperature"].shape(1);
@@ -90,7 +90,7 @@ void eval_virtual_potential_temperature_ad(atlas::FieldSet & hatFlds,
     }
   }
   hatFlds["specific_humidity"].set_dirty();
-  hatFlds["potential_temperature"].set_dirty();
+  hatFlds["air_potential_temperature"].set_dirty();
   hatFlds["virtual_potential_temperature"].set_dirty();
 
   oops::Log::trace() << "[eval_virtual_potential_temperature_ad()] ... done" << std::endl;
