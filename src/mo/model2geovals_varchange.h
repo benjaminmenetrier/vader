@@ -42,7 +42,7 @@ namespace mo {
 ///        (it includes metadata "boundary_layer_index" )
 ///     height_above_mean_sea_level_levels = height on rho model levels
 ///     pressure_levels_minus_one = pressure on rho model levels
-///     specific_humidity
+///     water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water
 ///
 bool evalParamAParamB(atlas::FieldSet & fields);
 

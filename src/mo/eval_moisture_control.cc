@@ -21,7 +21,8 @@ namespace mo {
 
 void eval_moisture_control_traj(atlas::FieldSet & fields) {
   auto qtView = make_view<const double, 2>(fields["qt"]);
-  auto qView = make_view<const double, 2>(fields["specific_humidity"]);
+  auto qView = make_view<const double, 2>(
+                              fields["water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water"]);
   auto thetaView = make_view<const double, 2>(fields["air_potential_temperature"]);
   auto exnerView = make_view<const double, 2>(fields["dimensionless_exner_function"]);
   auto dlsvpdTView = make_view<const double, 2>(fields["dlsvpdT"]);

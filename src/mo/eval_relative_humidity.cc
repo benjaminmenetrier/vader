@@ -23,6 +23,10 @@ using atlas::array::make_view;
 using atlas::idx_t;
 using atlas::util::Config;
 
+namespace {
+  const char specific_humidity_mo[] = "water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water";
+}  // namespace
+
 namespace mo {
 
 // --------------------------------------------------------------------------------------
@@ -40,7 +44,7 @@ bool eval_relative_humidity_nl(atlas::FieldSet & stateFlds) {
   // while it should have units 1 (from 0 to 1) according to the CCPP convention.
   const auto & ghost = stateFlds["relative_humidity"].functionspace().ghost();
   atlas::field::for_each_value_masked(ghost,
-                                      stateFlds["specific_humidity"],
+                                      stateFlds[specific_humidity_mo],
                                       stateFlds["qsat"],
                                       stateFlds["relative_humidity"],
                                       [&](const double q, const double qsat, double& rh) {
@@ -67,10 +71,10 @@ void eval_relative_humidity_tl(atlas::FieldSet & incFlds,
   // and evalSatSpecificHumidity from air_temperature and air_pressure inputs
   const auto & ghost = incFlds["relative_humidity"].functionspace().ghost();
   atlas::field::for_each_value_masked(ghost,
-                                      std::make_tuple(incFlds["specific_humidity"],
+                                      std::make_tuple(incFlds[specific_humidity_mo],
                                                       incFlds["air_temperature"],
                                                       incFlds["relative_humidity"],
-                                                      stateFlds["specific_humidity"],
+                                                      stateFlds[specific_humidity_mo],
                                                       stateFlds["qsat"],
                                                       stateFlds["dlsvpdT"]),
           [](const double qInc, const double tInc, double& rhInc,
@@ -91,10 +95,10 @@ void eval_relative_humidity_ad(atlas::FieldSet & hatFlds,
 
   const auto & ghost = hatFlds["relative_humidity"].functionspace().ghost();
   atlas::field::for_each_value_masked(ghost,
-                                      std::make_tuple(hatFlds["specific_humidity"],
+                                      std::make_tuple(hatFlds[specific_humidity_mo],
                                                       hatFlds["air_temperature"],
                                                       hatFlds["relative_humidity"],
-                                                      stateFlds["specific_humidity"],
+                                                      stateFlds[specific_humidity_mo],
                                                       stateFlds["qsat"],
                                                       stateFlds["dlsvpdT"]),
           [](double& qHat, double& tHat, double& rhHat,

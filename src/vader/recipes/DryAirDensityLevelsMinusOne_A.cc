@@ -27,7 +27,8 @@ const oops::Variables DryAirDensityLevelsMinusOne_A::
                    "height_above_mean_sea_level_levels", "air_potential_temperature",
                    "cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water",
                    "cloud_ice_mixing_ratio_wrt_moist_air_and_condensed_water",
-                   "specific_humidity", "air_pressure_levels_minus_one"}};
+                   "water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water",
+                   "air_pressure_levels_minus_one"}};
     // For renaming to CCPP standard in (hopefully) near future:
     // Ingredients = {"height_above_mean_sea_level_at_interface",
     //                "height_above_mean_sea_levels_extended_up_by_one",

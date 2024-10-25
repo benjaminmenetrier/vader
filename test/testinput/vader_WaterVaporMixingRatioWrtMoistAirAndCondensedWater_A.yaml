@@ -6,5 +6,5 @@ trajectory filename: testdata/gauss_state_F12.nc
 ingredients:
   - water_vapor_mixing_ratio_wrt_dry_air
   - total_water_mixing_ratio_wrt_dry_air
-products: [specific_humidity]
+products: [water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water]
 adjoint test tolerance: 1.e-13

@@ -46,7 +46,8 @@ bool evalParamAParamB(atlas::FieldSet & stateFlds)
                         make_view<const double, 2>(stateFlds["height_above_mean_sea_level_levels"]);
   const auto pressureLevelsView = make_view<const double, 2>
       (stateFlds["air_pressure_levels_minus_one"]);
-  const auto specificHumidityView = make_view<const double, 2>(stateFlds["specific_humidity"]);
+  const auto specificHumidityView = make_view<const double, 2>(
+                           stateFlds["water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water"]);
   auto param_aView = make_view<double, 2>(stateFlds["surf_param_a"]);
   auto param_bView = make_view<double, 2>(stateFlds["surf_param_b"]);
 

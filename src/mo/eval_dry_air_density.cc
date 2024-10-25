@@ -17,6 +17,10 @@
 using atlas::array::make_view;
 using atlas::idx_t;
 
+namespace {
+  const char specific_humidity_mo[] = "water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water";
+}  // namespace
+
 namespace mo {
 
 // -------------------------------------------------------------------------------------------------
@@ -31,7 +35,7 @@ void eval_dry_air_density_from_pressure_levels_minus_one_nl(atlas::FieldSet & st
   const auto hlView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level_levels"]);
   const auto hView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level"]);
   const auto ptView = make_view<const double, 2>(stateFlds["air_potential_temperature"]);
-  const auto qView = make_view<const double, 2>(stateFlds["specific_humidity"]);
+  const auto qView = make_view<const double, 2>(stateFlds[specific_humidity_mo]);
   const auto qclView = make_view<const double, 2>(
                     stateFlds["cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water"]);
   const auto qcfView = make_view<const double, 2>(
@@ -88,7 +92,7 @@ void eval_dry_air_density_from_pressure_levels_minus_one_tl(atlas::FieldSet & in
   const auto hlView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level_levels"]);
   const auto hView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level"]);
   const auto ptView = make_view<const double, 2>(stateFlds["air_potential_temperature"]);
-  const auto qView = make_view<const double, 2>(stateFlds["specific_humidity"]);
+  const auto qView = make_view<const double, 2>(stateFlds[specific_humidity_mo]);
   const auto qclView = make_view<const double, 2>(
                     stateFlds["cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water"]);
   const auto qcfView = make_view<const double, 2>(
@@ -98,7 +102,7 @@ void eval_dry_air_density_from_pressure_levels_minus_one_tl(atlas::FieldSet & in
 
   const auto pIncView = make_view<const double, 2>(incFlds["air_pressure_levels_minus_one"]);
   const auto ptIncView = make_view<const double, 2>(incFlds["air_potential_temperature"]);
-  const auto qIncView = make_view<const double, 2>(incFlds["specific_humidity"]);
+  const auto qIncView = make_view<const double, 2>(incFlds[specific_humidity_mo]);
   const auto qclIncView = make_view<const double, 2>(
                       incFlds["cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water"]);
   const auto qcfIncView = make_view<const double, 2>(
@@ -181,7 +185,7 @@ void eval_dry_air_density_from_pressure_levels_minus_one_ad(atlas::FieldSet & ha
   const auto hlView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level_levels"]);
   const auto hView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level"]);
   const auto ptView = make_view<const double, 2>(stateFlds["air_potential_temperature"]);
-  const auto qView = make_view<const double, 2>(stateFlds["specific_humidity"]);
+  const auto qView = make_view<const double, 2>(stateFlds[specific_humidity_mo]);
   const auto qclView = make_view<const double, 2>(
                  stateFlds["cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water"]);
   const auto qcfView = make_view<const double, 2>(
@@ -191,7 +195,7 @@ void eval_dry_air_density_from_pressure_levels_minus_one_ad(atlas::FieldSet & ha
 
   auto pHatView = make_view<double, 2>(hatFlds["air_pressure_levels_minus_one"]);
   auto ptHatView = make_view<double, 2>(hatFlds["air_potential_temperature"]);
-  auto qHatView = make_view<double, 2>(hatFlds["specific_humidity"]);
+  auto qHatView = make_view<double, 2>(hatFlds[specific_humidity_mo]);
   auto qclHatView = make_view<double, 2>(
                     hatFlds["cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water"]);
   auto qcfHatView = make_view<double, 2>
@@ -289,7 +293,7 @@ void eval_dry_air_density_from_pressure_levels_minus_one_ad(atlas::FieldSet & ha
   }
   hatFlds["air_pressure_levels_minus_one"].set_dirty();
   hatFlds["air_potential_temperature"].set_dirty();
-  hatFlds["specific_humidity"].set_dirty();
+  hatFlds[specific_humidity_mo].set_dirty();
   hatFlds["cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water"].set_dirty();
   hatFlds["cloud_ice_mixing_ratio_wrt_moist_air_and_condensed_water"].set_dirty();
   hatFlds["dry_air_density_levels_minus_one"].set_dirty();
@@ -310,7 +314,7 @@ void eval_dry_air_density_without_condensate_from_pressure_levels_minus_one_nl(a
   const auto hlView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level_levels"]);
   const auto hView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level"]);
   const auto ptView = make_view<const double, 2>(stateFlds["air_potential_temperature"]);
-  const auto qView = make_view<const double, 2>(stateFlds["specific_humidity"]);
+  const auto qView = make_view<const double, 2>(stateFlds[specific_humidity_mo]);
   const auto pView = make_view<const double, 2>(stateFlds["air_pressure_levels_minus_one"]);
   auto dryrhoView = make_view<double, 2>(stateFlds["dry_air_density_levels_minus_one"]);
 
@@ -365,13 +369,13 @@ void eval_dry_air_density_without_condensate_from_pressure_levels_minus_one_tl(a
   const auto hlView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level_levels"]);
   const auto hView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level"]);
   const auto ptView = make_view<const double, 2>(stateFlds["air_potential_temperature"]);
-  const auto qView = make_view<const double, 2>(stateFlds["specific_humidity"]);
+  const auto qView = make_view<const double, 2>(stateFlds[specific_humidity_mo]);
   const auto pView = make_view<const double, 2>(stateFlds["air_pressure_levels_minus_one"]);
   const auto dryrhoView = make_view<const double, 2>(stateFlds["dry_air_density_levels_minus_one"]);
 
   const auto pIncView = make_view<const double, 2>(incFlds["air_pressure_levels_minus_one"]);
   const auto ptIncView = make_view<const double, 2>(incFlds["air_potential_temperature"]);
-  const auto qIncView = make_view<const double, 2>(incFlds["specific_humidity"]);
+  const auto qIncView = make_view<const double, 2>(incFlds[specific_humidity_mo]);
   auto dryrhoIncView = make_view<double, 2>(incFlds["dry_air_density_levels_minus_one"]);
   const idx_t numLevels = incFlds["dry_air_density_levels_minus_one"].shape(1);
   const idx_t sizeOwned =
@@ -439,13 +443,13 @@ void eval_new_dry_air_density_without_condensate_from_pressure_levels_ad(atlas::
   const auto hlView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level_levels"]);
   const auto hView = make_view<const double, 2>(stateFlds["height_above_mean_sea_level"]);
   const auto ptView = make_view<const double, 2>(stateFlds["air_potential_temperature"]);
-  const auto qView = make_view<const double, 2>(stateFlds["specific_humidity"]);
+  const auto qView = make_view<const double, 2>(stateFlds[specific_humidity_mo]);
   const auto pView = make_view<const double, 2>(stateFlds["air_pressure_levels_minus_one"]);
   const auto dryrhoView = make_view<const double, 2>(stateFlds["dry_air_density_levels_minus_one"]);
 
   auto pHatView = make_view<double, 2>(hatFlds["air_pressure_levels_minus_one"]);
   auto ptHatView = make_view<double, 2>(hatFlds["air_potential_temperature"]);
-  auto qHatView = make_view<double, 2>(hatFlds["specific_humidity"]);
+  auto qHatView = make_view<double, 2>(hatFlds[specific_humidity_mo]);
   auto dryrhoHatView = make_view<double, 2>(hatFlds["dry_air_density_levels_minus_one"]);
 
   double h_minus_hl;
@@ -507,7 +511,7 @@ void eval_new_dry_air_density_without_condensate_from_pressure_levels_ad(atlas::
   }
   hatFlds["air_pressure_levels_minus_one"].set_dirty();
   hatFlds["air_potential_temperature"].set_dirty();
-  hatFlds["specific_humidity"].set_dirty();
+  hatFlds[specific_humidity_mo].set_dirty();
   hatFlds["dry_air_density_levels_minus_one"].set_dirty();
 
   oops::Log::trace() <<

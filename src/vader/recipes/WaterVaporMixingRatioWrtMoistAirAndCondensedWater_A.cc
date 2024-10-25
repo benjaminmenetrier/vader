@@ -44,7 +44,7 @@ std::string WaterVaporMixingRatioWrtMoistAirAndCondensedWater_A::name() const
 
 oops::Variable WaterVaporMixingRatioWrtMoistAirAndCondensedWater_A::product() const
 {
-    return oops::Variable{"specific_humidity"};
+    return oops::Variable{"water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water"};
 }
 
 oops::Variables WaterVaporMixingRatioWrtMoistAirAndCondensedWater_A::ingredients() const
