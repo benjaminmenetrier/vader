@@ -94,14 +94,16 @@ bool AirPressureAtInterface_A::executeNL(atlas::FieldSet & afieldset) {
     ASSERT_MSG(prsi_units == ps_units, "In Vader::AirPressureAtInterface_A::executeNL the units "
                "for pressure " + prsi_units + "do not match the surface pressure units" + ps_units);
 
+    // Get number of levels
+    int nLevels = configVariables_.getInt("nLevels");
+
     // Extract ak/bk from client config
     std::vector<double> ak = configVariables_.getDoubleVector
                                                 ("sigma_pressure_hybrid_coordinate_a_coefficient");
     std::vector<double> bk = configVariables_.getDoubleVector
                                                 ("sigma_pressure_hybrid_coordinate_b_coefficient");
-
-    // Get number of levels
-    int nLevels = configVariables_.getInt("nLevels");
+    ASSERT(ak.size() == nLevels+1);
+    ASSERT(bk.size() == nLevels+1);
 
     // Get the grid size
     const int gridSize = ps.shape(0);
