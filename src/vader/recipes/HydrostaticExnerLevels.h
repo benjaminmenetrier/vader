@@ -5,8 +5,7 @@
  * which can be obtained at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-#ifndef SRC_VADER_RECIPES_HYDROSTATICEXNERLEVELS_H_
-#define SRC_VADER_RECIPES_HYDROSTATICEXNERLEVELS_H_
+#pragma once
 
 #include <map>
 #include <string>
@@ -60,5 +59,3 @@ class HydrostaticExnerLevels_A : public RecipeBase {
 };
 
 }  // namespace vader
-
-#endif  // SRC_VADER_RECIPES_HYDROSTATICEXNERLEVELS_H_
