@@ -75,12 +75,8 @@ class RecipeBase : public util::Printable,
 /// Method returning the functionspace for the variable produced
   virtual atlas::FunctionSpace productFunctionSpace(const atlas::FieldSet &) const = 0;
 
-/// Flag indicating whether the recipe requires setup.
-  virtual bool requiresSetup() { return false; }
 /// Flag indicating whether the recipe implements the executeTL/AD methods.
   virtual bool hasTLAD() const { return false; }
-/// setup must return true on success, false on failure
-  virtual bool setup(atlas::FieldSet &) { return true; }
 
 /// Execute methods perform the variable change
 /// execute must return true on success, false on failure

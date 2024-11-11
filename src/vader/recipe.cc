@@ -49,16 +49,6 @@ bool Recipe::hasTLAD() const
     return recipe_->hasTLAD();
 }
 // ------------------------------------------------------------------------------------------------
-bool Recipe::requiresSetup() const
-{
-    return recipe_->requiresSetup();
-}
-// ------------------------------------------------------------------------------------------------
-bool Recipe::setup(atlas::FieldSet & afieldset)
-{
-    return recipe_->setup(afieldset);
-}
-// ------------------------------------------------------------------------------------------------
 bool Recipe::executeNL(atlas::FieldSet & afieldset)
 {
     return recipe_->executeNL(afieldset);

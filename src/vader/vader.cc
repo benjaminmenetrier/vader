@@ -516,9 +516,6 @@ void Vader::executePlanNL(atlas::FieldSet & afieldset,
         checkOrAddField(afieldset, varPlan.first.name(),
                         varPlan.second->productFunctionSpace(afieldset),
                         varPlan.second->productLevels(afieldset));
-        if (varPlan.second->requiresSetup()) {
-            varPlan.second->setup(afieldset);
-        }
         const bool recipeSuccess = varPlan.second->executeNL(afieldset);
         ASSERT(recipeSuccess);  // At least for now, we'll require the execution to be successful
         oops::Log::info() << "Variable '" << varPlan.first <<
@@ -549,9 +546,6 @@ void Vader::executePlanTL(atlas::FieldSet & afieldset,
         checkOrAddField(afieldset, varPlan.first.name(),
                         varPlan.second->productFunctionSpace(afieldset),
                         varPlan.second->productLevels(afieldset));
-        if (varPlan.second->requiresSetup()) {
-            varPlan.second->setup(afieldset);
-        }
         const bool recipeSuccess =
             varPlan.second->executeTL(afieldset, trajectory_);
         ASSERT(recipeSuccess);  // At least for now, we'll require the execution to be successful
@@ -587,9 +581,6 @@ void Vader::executePlanAD(atlas::FieldSet & afieldset,
             checkOrAddField(afieldset, ingredient.name(),
                      trajectory_.field(ingredient.name()).functionspace(),
                      trajectory_.field(ingredient.name()).shape(1), true);
-        }
-        if (varPlanIt->second->requiresSetup()) {
-            varPlanIt->second->setup(afieldset);
         }
         const bool recipeSuccess =
             varPlanIt->second->executeAD(afieldset, trajectory_);
