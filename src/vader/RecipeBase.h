@@ -79,10 +79,9 @@ class RecipeBase : public util::Printable,
   virtual bool hasTLAD() const { return false; }
 
 /// Execute methods perform the variable change
-/// execute must return true on success, false on failure
-  virtual bool executeNL(atlas::FieldSet &) = 0;
-  virtual bool executeTL(atlas::FieldSet &, const atlas::FieldSet &) { return true; }
-  virtual bool executeAD(atlas::FieldSet &, const atlas::FieldSet &) { return true; }
+  virtual void executeNL(atlas::FieldSet &) = 0;
+  virtual void executeTL(atlas::FieldSet &, const atlas::FieldSet &) {}
+  virtual void executeAD(atlas::FieldSet &, const atlas::FieldSet &) {}
 
  private:
   virtual void print(std::ostream &) const;
