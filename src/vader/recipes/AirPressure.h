@@ -83,7 +83,7 @@ class AirPressure_B : public RecipeBase
     oops::Variables ingredients() const override;
     size_t productLevels(const atlas::FieldSet &) const override;
     atlas::FunctionSpace productFunctionSpace(const atlas::FieldSet &) const override;
-    bool executeNL(atlas::FieldSet &) override;
+    void executeNL(atlas::FieldSet &) override;
 
  private:
     const VaderConfigVars & configVariables_;
