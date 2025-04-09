@@ -26,13 +26,16 @@ const oops::Variables WaterVaporMixingRatioWrtDryAir_A::Ingredients{
                       {"water_vapor_mixing_ratio_wrt_moist_air"}};
 
 // Register the maker
-static RecipeMaker<WaterVaporMixingRatioWrtDryAir_A> makerWaterVaporMixingRatioWrtDryAir_(WaterVaporMixingRatioWrtDryAir_A::Name);
+static RecipeMaker<WaterVaporMixingRatioWrtDryAir_A> makerWaterVaporMixingRatioWrtDryAir_(
+                   WaterVaporMixingRatioWrtDryAir_A::Name);
 
 WaterVaporMixingRatioWrtDryAir_A::WaterVaporMixingRatioWrtDryAir_A(const Parameters_ & params,
                                        const VaderConfigVars & configVariables) :
     configVariables_{configVariables}
 {
-    oops::Log::trace() << "WaterVaporMixingRatioWrtDryAir_A::WaterVaporMixingRatioWrtDryAir_A(params)" << std::endl;
+    oops::Log::trace() 
+          << "WaterVaporMixingRatioWrtDryAir_A::WaterVaporMixingRatioWrtDryAir_A(params)"
+          << std::endl;
 }
 
 std::string WaterVaporMixingRatioWrtDryAir_A::name() const
@@ -63,7 +66,9 @@ atlas::FunctionSpace WaterVaporMixingRatioWrtDryAir_A::productFunctionSpace
 
 void WaterVaporMixingRatioWrtDryAir_A::executeNL(atlas::FieldSet & afieldset)
 {
-    oops::Log::trace() << "entering WaterVaporMixingRatioWrtDryAir_A::executeNL function" << std::endl;
+    oops::Log::trace()
+          << "entering WaterVaporMixingRatioWrtDryAir_A::executeNL function"
+          << std::endl;
 
     atlas::field::for_each_value(afieldset["water_vapor_mixing_ratio_wrt_moist_air"],
                                  afieldset["water_vapor_mixing_ratio_wrt_dry_air"],
@@ -71,7 +76,9 @@ void WaterVaporMixingRatioWrtDryAir_A::executeNL(atlas::FieldSet & afieldset)
         mixr = q / (1. - q);
     });
 
-    oops::Log::trace() << "leaving WaterVaporMixingRatioWrtDryAir_A::executeNL function" << std::endl;
+    oops::Log::trace()
+          << "leaving WaterVaporMixingRatioWrtDryAir_A::executeNL function"
+          << std::endl;
 }
 
 }  // namespace vader
