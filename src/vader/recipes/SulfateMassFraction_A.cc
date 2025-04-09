@@ -70,7 +70,7 @@ void SulfateMassFraction_A::executeNL(atlas::FieldSet & afieldset)
     atlas::field::for_each_value(afieldset["sulfate_ppmv"],
                                  afieldset["mass_fraction_of_sulfate_in_air"],
                                  [&](const double sulf_ppmv, double& sulf_ugkg) {
-        sulf_ugkg = sulf_ppmv * sulfmw / airmw * 1e-6 * 1e9;
+        sulf_ugkg = sulf_ppmv * sulfmw / airmw * 1e3;
     });
 
     oops::Log::trace() << "leaving SulfateMassFraction_A::executeNL function" << std::endl;

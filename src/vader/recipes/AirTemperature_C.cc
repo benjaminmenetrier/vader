@@ -26,7 +26,7 @@ namespace vader
 // Static attribute initialization
 const char AirTemperature_C::Name[] = "AirTemperature_C";
 const char AT[] = "air_temperature";
-const char PAPT[] = "perturbation_air_potential_temperature";
+const char PAPT[] = "perturbation_of_air_potential_temperature";
 const char AP[] = "air_pressure";
 const oops::Variables AirTemperature_C::Ingredients{std::vector<std::string>{PAPT, AP}};
 
@@ -69,7 +69,7 @@ void AirTemperature_C::executeNL(atlas::FieldSet & fields)
 {
     oops::Log::trace() << "entering AirTemperature_C::executeNL function" << std::endl;
 
-    const double pt_base = configVariables_.getDouble("base_air_potential_temperature");
+    const double pt_base = configVariables_.getDouble("base_state_of_air_potential_temperature");
 
     auto air_pressure_view = make_view<const double, 2>(fields[AP]);
     auto perturbation_potential_temperature_view = make_view<const double, 2>(fields[PAPT]);

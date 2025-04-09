@@ -21,8 +21,8 @@ namespace vader {
 
 // Static attribute initialization
 const char AirPressure_B::Name[] = "AirPressure_B";
-const oops::Variables AirPressure_B::Ingredients{std::vector<std::string>{"base_air_pressure",
-                                                             "perturbation_air_pressure"}};
+const oops::Variables AirPressure_B::Ingredients{std::vector<std::string>{"base_state_of_air_pressure",
+                                                             "perturbation_of_air_pressure"}};
 
 // -------------------------------------------------------------------------------------------------
 
@@ -60,13 +60,13 @@ oops::Variables AirPressure_B::ingredients() const {
 // -------------------------------------------------------------------------------------------------
 
 size_t AirPressure_B::productLevels(const atlas::FieldSet & afieldset) const {
-    return afieldset.field("perturbation_air_pressure").shape(1);
+    return afieldset.field("perturbation_of_air_pressure").shape(1);
 }
 
 // -------------------------------------------------------------------------------------------------
 
 atlas::FunctionSpace AirPressure_B::productFunctionSpace(const atlas::FieldSet & afieldset) const {
-    return afieldset.field("perturbation_air_pressure").functionspace();
+    return afieldset.field("perturbation_of_air_pressure").functionspace();
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -76,8 +76,8 @@ void AirPressure_B::executeNL(atlas::FieldSet & afieldset) {
     oops::Log::trace() << "AirPressure_B::executeNL Starting" << std::endl;
 
     // Get fields
-    atlas::Field airPressureBaseF = afieldset.field("base_air_pressure");
-    atlas::Field airPressurePertF = afieldset.field("perturbation_air_pressure");
+    atlas::Field airPressureBaseF = afieldset.field("base_state_of_air_pressure");
+    atlas::Field airPressurePertF = afieldset.field("perturbation_of_air_pressure");
     atlas::Field airPressureF = afieldset.field("air_pressure");
 
     auto airPressureBase = atlas::array::make_view<double, 2>(airPressureBaseF);

@@ -41,9 +41,6 @@ vader/recipes/DryAirDensity.h
 vader/recipes/DryAirDensity_A.cc
 vader/recipes/DryAirDensityLevelsMinusOne.h
 vader/recipes/DryAirDensityLevelsMinusOne_A.cc
-vader/recipes/HumidityMixingRatio.h
-vader/recipes/HumidityMixingRatio_A.cc
-vader/recipes/HumidityMixingRatio_B.cc
 vader/recipes/HydrostaticExnerLevels.h
 vader/recipes/HydrostaticExnerLevels_A.cc
 vader/recipes/HydrostaticPressureLevels.h
@@ -82,6 +79,8 @@ vader/recipes/VirtualPotentialTemperature_B.cc
 vader/recipes/VirtualPotentialTemperature.h
 vader/recipes/NorthwardWindAt10m_A.cc
 vader/recipes/NorthwardWindAt10m.h
+vader/recipes/WaterVaporMixingRatioWrtDryAir.h
+vader/recipes/WaterVaporMixingRatioWrtDryAir_A.cc
 vader/recipes/WaterVaporMixingRatioWrtMoistAir.h
 vader/recipes/WaterVaporMixingRatioWrtMoistAir_A.cc
 vader/recipes/WaterVaporMixingRatioWrtMoistAirAndCondensedWater.h
