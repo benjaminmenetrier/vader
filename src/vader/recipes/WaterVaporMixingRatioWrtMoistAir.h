@@ -29,10 +29,11 @@ class WaterVaporMixingRatioWrtMoistAir_AParameters : public RecipeParametersBase
 };
 
 // ------------------------------------------------------------------------------------------------
-/*! \brief WaterVaporMixingRatioWrtMoistAir_A class defines a recipe for humidity mixing ratio
+/*! \brief WaterVaporMixingRatioWrtMoistAir_A class defines a recipe for water_vapor_mixing_ratio_
+ *         wrt_moist_air (specific humidity). 
  *
- *  \details This instantiation of RecipeBase produces humidity mixing ratio (r)
- *           using specific humidity (q).
+ *  \details This instantiation of RecipeBase produces water_vapor_mixing_ratio_wrt_moist_air (q,
+ *           specific humidity) using water_vapor_mixing_ratio_wrt_dry_air (r, humidity mixing ratio).
  *
  */
 class WaterVaporMixingRatioWrtMoistAir_A : public RecipeBase {
