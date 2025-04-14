@@ -33,7 +33,7 @@ WaterVaporMixingRatioWrtDryAir_A::WaterVaporMixingRatioWrtDryAir_A(const Paramet
                                        const VaderConfigVars & configVariables) :
     configVariables_{configVariables}
 {
-    oops::Log::trace() 
+    oops::Log::trace()
           << "WaterVaporMixingRatioWrtDryAir_A::WaterVaporMixingRatioWrtDryAir_A(params)"
           << std::endl;
 }

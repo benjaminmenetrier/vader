@@ -70,11 +70,12 @@ void WaterVaporMixingRatioWrtMoistAir_A::executeNL(atlas::FieldSet & afieldset)
           << "entering WaterVaporMixingRatioWrtMoistAir_A::executeNL function"
           << std::endl;
 
-    // water_vapor_mixing_ratio_wrt_dry_air in kg/kg; water_vapor_mixing_ratio_wrt_moist_air in kg/kg
+    // water_vapor_mixing_ratio_wrt_dry_air in kg/kg;
+    // water_vapor_mixing_ratio_wrt_moist_air in kg/kg;
     atlas::field::for_each_value(afieldset["water_vapor_mixing_ratio_wrt_dry_air"],
                                  afieldset["water_vapor_mixing_ratio_wrt_moist_air"],
                                  [&](const double mixr, double& q) {
-        q = mixr / (1. + mixr) ;
+        q = mixr / (1. + mixr);
     });
 
     oops::Log::trace()
