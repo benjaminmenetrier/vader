@@ -121,21 +121,21 @@ class WaterVaporMixingRatioWrtDryAir_B : public RecipeBase {
 };
 
 // ------------------------------------------------------------------------------------------------
-/*! \brief WaterVaporMixingRatioWrtDryAir_A class defines a recipe for water_vapor_mixing_ratio_wrt
+/*! \brief WaterVaporMixingRatioWrtDryAir_C class defines a recipe for water_vapor_mixing_ratio_wrt
            _dry_air (humidity mixing ratio)
  *
  *  \details This instantiation of RecipeBase produces water_vapor_mixing_ratio_wrt_dry_air (r,
              humidity mixing ratio) using water_vapor_mixing_ratio_wrt_moist_air (q, specific humidity).
  *
  */
-class WaterVaporMixingRatioWrtDryAir_A : public RecipeBase {
+class WaterVaporMixingRatioWrtDryAir_C : public RecipeBase {
  public:
     static const char Name[];
     static const oops::Variables Ingredients;
 
-    typedef WaterVaporMixingRatioWrtDryAir_AParameters Parameters_;
+    typedef WaterVaporMixingRatioWrtDryAir_CParameters Parameters_;
 
-    WaterVaporMixingRatioWrtDryAir_A(const Parameters_ &, const VaderConfigVars &);
+    WaterVaporMixingRatioWrtDryAir_C(const Parameters_ &, const VaderConfigVars &);
 
     // Recipe base class overrides
     std::string name() const override;

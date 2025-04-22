@@ -110,8 +110,8 @@ class AirTemperature_B : public RecipeBase {
 };
 
 // ------------------------------------------------------------------------------------------------
-/*! \brief AirTemperature_C class defines a recipe for temperature from air pressure and air potential
- *         temperature (for WRF).
+/*! \brief AirTemperature_C class defines a recipe for temperature from air pressure and air 
+ *         potential temperature (for WRF).
  *
  *  \detail This recipe is a special case for WRF. It calculates air potential temperature using 
  *          perturbation air potential temperature (T in wrfout) and base air potential temperature 
