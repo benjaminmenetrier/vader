@@ -1,5 +1,4 @@
 /*
- * (C) Copyright 2024 UCAR
  * (C) Crown Copyright 2025 Met Office.
  *
  * This software is licensed under the terms of the Apache Licence Version 2.0
@@ -20,8 +19,8 @@
 
 namespace vader {
 
-class WaterVaporMixingRatioWrtDryAir_AParameters : public RecipeParametersBase {
-  OOPS_CONCRETE_PARAMETERS(WaterVaporMixingRatioWrtDryAir_AParameters,
+class CloudIceMixingRatioWrtDryAir_AParameters : public RecipeParametersBase {
+  OOPS_CONCRETE_PARAMETERS(CloudIceMixingRatioWrtDryAir_AParameters,
                            RecipeParametersBase)
 
  public:
@@ -30,18 +29,8 @@ class WaterVaporMixingRatioWrtDryAir_AParameters : public RecipeParametersBase {
      this};
 };
 
-class WaterVaporMixingRatioWrtDryAir_BParameters : public RecipeParametersBase {
-  OOPS_CONCRETE_PARAMETERS(WaterVaporMixingRatioWrtDryAir_BParameters,
-                           RecipeParametersBase)
-
- public:
-  oops::RequiredParameter<std::string> name{
-     "recipe name",
-     this};
-};
-
-class WaterVaporMixingRatioWrtDryAir_CParameters : public RecipeParametersBase {
-  OOPS_CONCRETE_PARAMETERS(WaterVaporMixingRatioWrtDryAir_CParameters,
+class CloudIceMixingRatioWrtDryAir_BParameters : public RecipeParametersBase {
+  OOPS_CONCRETE_PARAMETERS(CloudIceMixingRatioWrtDryAir_BParameters,
                            RecipeParametersBase)
 
  public:
@@ -51,23 +40,22 @@ class WaterVaporMixingRatioWrtDryAir_CParameters : public RecipeParametersBase {
 };
 
 // ------------------------------------------------------------------------------------------------
-/*! \brief WaterVaporMixingRatioWrtDryAir_A class defines a recipe for water
+/*! \brief CloudIceMixingRatioWrtDryAir_A class defines a recipe for cloud ice
  *         vapor mixing ratio wrt dry air
  *
- *  \details This instantiation of RecipeBase produces the water vapor mixing ratio wrt dry air
- *          increment using the increment of water vapor mixing ratio wrt moist air
+ *  \details This instantiation of RecipeBase produces the cloud ice mixing ratio wrt dry air
+ *          increment using the increment of cloud ice mixing ratio wrt moist air
  *          and condensed water
  *          The trajectory uses quantities that involve mixing ratios wrt dry air
->>>>>>> origin/develop
  */
-class WaterVaporMixingRatioWrtDryAir_A : public RecipeBase {
+class CloudIceMixingRatioWrtDryAir_A : public RecipeBase {
  public:
     static const char Name[];
     static const oops::Variables Ingredients;
 
-    typedef WaterVaporMixingRatioWrtDryAir_AParameters Parameters_;
+    typedef CloudIceMixingRatioWrtDryAir_AParameters Parameters_;
 
-    WaterVaporMixingRatioWrtDryAir_A(const Parameters_ &, const VaderConfigVars &);
+    CloudIceMixingRatioWrtDryAir_A(const Parameters_ &, const VaderConfigVars &);
 
     // Recipe base class overrides
     std::string name() const override;
@@ -85,24 +73,24 @@ class WaterVaporMixingRatioWrtDryAir_A : public RecipeBase {
 };
 
 // ------------------------------------------------------------------------------------------------
-/*! \brief WaterVaporMixingRatioWrtDryAir_B class defines a recipe for water
+/*! \brief CloudIceMixingRatioWrtDryAir_B class defines a recipe for cloud ice
  *         vapor mixing ratio wrt dry air
  *
- *  \details This instantiation of RecipeBase produces the water vapor mixing ratio wrt dry air
- *          increment using the increment of water vapor mixing ratio wrt moist air
+ *  \details This instantiation of RecipeBase produces the cloud ice mixing ratio wrt dry air
+ *          increment using the increment of cloud ice mixing ratio wrt moist air
  *          and condensed water
  *          The trajectory uses quantities that involve mixing ratios wrt moist air
  *          and condensed water.
  *          This is the more standard recipe
  */
-class WaterVaporMixingRatioWrtDryAir_B : public RecipeBase {
+class CloudIceMixingRatioWrtDryAir_B : public RecipeBase {
  public:
     static const char Name[];
     static const oops::Variables Ingredients;
 
-    typedef WaterVaporMixingRatioWrtDryAir_BParameters Parameters_;
+    typedef CloudIceMixingRatioWrtDryAir_BParameters Parameters_;
 
-    WaterVaporMixingRatioWrtDryAir_B(const Parameters_ &, const VaderConfigVars &);
+    CloudIceMixingRatioWrtDryAir_B(const Parameters_ &, const VaderConfigVars &);
 
     // Recipe base class overrides
     std::string name() const override;
@@ -119,34 +107,4 @@ class WaterVaporMixingRatioWrtDryAir_B : public RecipeBase {
 
  private:
 };
-
-// ------------------------------------------------------------------------------------------------
-/*! \brief WaterVaporMixingRatioWrtDryAir_A class defines a recipe for water_vapor_mixing_ratio_wrt
-           _dry_air (humidity mixing ratio)
- *
- *  \details This instantiation of RecipeBase produces water_vapor_mixing_ratio_wrt_dry_air (r,
-             humidity mixing ratio) using water_vapor_mixing_ratio_wrt_moist_air (q, specific humidity).
- *
- */
-class WaterVaporMixingRatioWrtDryAir_A : public RecipeBase {
- public:
-    static const char Name[];
-    static const oops::Variables Ingredients;
-
-    typedef WaterVaporMixingRatioWrtDryAir_AParameters Parameters_;
-
-    WaterVaporMixingRatioWrtDryAir_A(const Parameters_ &, const VaderConfigVars &);
-
-    // Recipe base class overrides
-    std::string name() const override;
-    oops::Variable product() const override;
-    oops::Variables ingredients() const override;
-    size_t productLevels(const atlas::FieldSet &) const override;
-    atlas::FunctionSpace productFunctionSpace(const atlas::FieldSet &) const override;
-    void executeNL(atlas::FieldSet &) override;
-
- private:
-    const VaderConfigVars & configVariables_;
-};
-
 }  // namespace vader
