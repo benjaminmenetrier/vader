@@ -64,8 +64,8 @@ void SulfateMassFraction_A::executeNL(atlas::FieldSet & afieldset)
 {
     oops::Log::trace() << "entering SulfateMassFraction_A::executeNL function" << std::endl;
 
-    const double sulfmw = configVariables_.getDouble("sulfmw");
-    const double airmw = configVariables_.getDouble("airmw");
+    const double sulfmw = configVariables_.getDouble("molecular_weight_of_so4");
+    const double airmw = configVariables_.getDouble("molecular_weight_of_air");
 
     atlas::field::for_each_value(afieldset["sulfate_ppmv"],
                                  afieldset["mass_fraction_of_sulfate_in_air"],

@@ -58,7 +58,6 @@ class WaterVaporMixingRatioWrtDryAir_CParameters : public RecipeParametersBase {
  *          increment using the increment of water vapor mixing ratio wrt moist air
  *          and condensed water
  *          The trajectory uses quantities that involve mixing ratios wrt dry air
->>>>>>> origin/develop
  */
 class WaterVaporMixingRatioWrtDryAir_A : public RecipeBase {
  public:
